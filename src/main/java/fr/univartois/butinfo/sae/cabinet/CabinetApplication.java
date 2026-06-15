@@ -39,6 +39,8 @@ public class CabinetApplication extends Application {
         stage.setTitle("cabinet FX");
 
         GlobalController controller = fxmlLoader.getController();
+        controller.setStage(stage);
+        controller.setScene(scene);
 
         stage.show();
     }

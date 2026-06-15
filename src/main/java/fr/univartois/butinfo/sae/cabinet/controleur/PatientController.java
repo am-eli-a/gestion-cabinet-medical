@@ -99,6 +99,23 @@ public class PatientController {
             stage.setScene(new Scene(root));
     }
 
+    @FXML
+    private void retourMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/GlobalView.fxml"));
+            Parent root = loader.load();
+
+            GlobalController controller = loader.getController();
+            Scene menuScene = new Scene(root);
+            controller.setStage(stage);
+            controller.setScene(menuScene);
+
+            stage.setScene(menuScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void afficherDetails(Patient patient) {
         if (patient == null) {
             nomLabel.setText("");

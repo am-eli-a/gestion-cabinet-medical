@@ -27,6 +27,14 @@ public class GlobalController {
     private Stage stage;
     private Scene scene;
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
     @FXML
     private Button listeMedecin;
 
@@ -157,6 +165,8 @@ public class GlobalController {
 
         PatientController controller = loader.getController();
         controller.setPatients(patients);
+        controller.setStage(stage);
+        controller.setScene(scene);
 
         stage.setTitle("Cabinet médical — Liste des patients");
         stage.setScene(scene);
