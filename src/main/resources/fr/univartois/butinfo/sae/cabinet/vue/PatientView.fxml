@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Font?>
+
+<!--
+    Vue Master-Detail des patients.
+    À gauche : la liste des patients (Master).
+    À droite : le détail du patient sélectionné (Detail).
+-->
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="fr.univartois.butinfo.sae.cabinet.controleur.PatientController"
+            prefWidth="720.0" prefHeight="440.0">
+
+    <left>
+        <ListView fx:id="patientListView" prefWidth="240.0">
+            <BorderPane.margin>
+                <Insets top="10.0" right="5.0" bottom="10.0" left="10.0"/>
+            </BorderPane.margin>
+        </ListView>
+    </left>
+
+    <center>
+        <GridPane hgap="12.0" vgap="10.0">
+            <padding>
+                <Insets top="15.0" right="15.0" bottom="15.0" left="15.0"/>
+            </padding>
+
+            <Label text="Détails du patient"
+                   GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                <font>
+                    <Font name="System Bold" size="16.0"/>
+                </font>
+            </Label>
+
+            <Label text="Nom :"        GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <Label fx:id="nomLabel"    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Prénom :"      GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <Label fx:id="prenomLabel"  GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="Téléphone :"      GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <Label fx:id="telephoneLabel"  GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="Email :"      GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <Label fx:id="emailLabel"  GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+            <Label text="Adresse :"      GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <Label fx:id="adresseLabel"  GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+            <Label text="Naissance :"      GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <Label fx:id="naissanceLabel"  GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+            <Label text="Âge :"      GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+            <Label fx:id="ageLabel"  GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+            <Label text="N° Sécu :"   GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+            <Label fx:id="secuLabel"  GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+            <Label text="Remboursement :"  GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+            <Label fx:id="tauxLabel"       GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+        </GridPane>
+    </center>
+</BorderPane>
