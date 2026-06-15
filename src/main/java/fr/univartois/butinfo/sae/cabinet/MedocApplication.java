@@ -17,8 +17,8 @@ public class MedocApplication extends Application {
     public void start(Stage stage) throws IOException {
         GestionMedicaments gestionMedocs = new GestionMedicaments();
         gestionMedocs.ajouterMedicament(new Medicament("Sertraline", "Anti-dépresseur", 5));
-        gestionMedocs.ajouterMedicament(new Medicament("Aspirine", "Anti-douleur", 3));
-        gestionMedocs.ajouterMedicament(new Medicament("Doliprane", "Anti-douleur", 2.5));
+        gestionMedocs.ajouterMedicament(new Medicament("Aspirine", "Marie", 5));
+        gestionMedocs.ajouterMedicament(new Medicament("Paracétamole", "Marie", 5));
 
         ObservableList<Medicament> medocs = FXCollections.observableArrayList(gestionMedocs.listerTousLesMedicaments());
 

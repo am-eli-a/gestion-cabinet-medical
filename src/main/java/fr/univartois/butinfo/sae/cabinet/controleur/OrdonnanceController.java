@@ -5,11 +5,16 @@ import fr.univartois.butinfo.sae.cabinet.modele.Ordonnance;
 import fr.univartois.butinfo.sae.cabinet.modele.Patient;
 import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
 import fr.univartois.butinfo.sae.cabinet.service.GestionOrdonnances;
+import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
 public class OrdonnanceController {
 
@@ -37,9 +42,60 @@ public class OrdonnanceController {
     @FXML
     private Label remarques;
 
+    private Stage stage;
+
+    private Scene scene;
+
+    private ObservableList<Medecin> medecins;
+
+    private ObservableList<Patient> patients;
+
 
     public void setOrdonnances(ObservableList<Ordonnance> ordonnances){
         ordonnanceListView.setItems(ordonnances);
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
+    public void setMedecins(ObservableList<Medecin> medecins) {
+        this.medecins = medecins;
+    }
+
+    public void setPatients(ObservableList<Patient> patients) {
+        this.patients = patients;
+    }
+
+    @FXML
+    private void supprimerOrdonnance() {
+        Ordonnance selectionnee = ordonnanceListView.getSelectionModel().getSelectedItem();
+        if (selectionnee != null) {
+            ordonnanceListView.getItems().remove(selectionnee);
+        }
+    }
+
+    @FXML
+    private void ajouterOrdonnance() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/OrdonnanceEditView.fxml"));
+            Parent root = loader.load();
+
+            OrdonnanceEditController editController = loader.getController();
+            editController.setOrdonnances(ordonnanceListView.getItems());
+            editController.setMedecins(medecins);
+            editController.setPatients(patients);
+            editController.setStage(stage);
+            editController.setSceneRetour(scene);
+
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -76,8 +132,8 @@ public class OrdonnanceController {
             return;
         }
         String Id = Integer.toString(ordonnance.getId());
-        String dateE = String.valueOf(dateEmission);
-        String dateV = String.valueOf(dateValidite);
+        String dateE = String.valueOf(ordonnance.getDateEmission());
+        String dateV = String.valueOf(ordonnance.getDateValidite());
         ordonnanceId.setText(Id);
         medecinLabel.setText(ordonnance.getMedecin().getNom());
         patientLabel.setText(ordonnance.getPatient().getNom());
