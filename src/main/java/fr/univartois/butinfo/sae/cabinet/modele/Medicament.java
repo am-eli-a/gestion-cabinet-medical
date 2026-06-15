@@ -15,7 +15,7 @@ public class Medicament {
   private static int compteurId = 1;
 
   /**
-   * Constructeur complet d'un Médicament.
+   * <p>Constructeur complet d'un Médicament.</p>
    */
   public Medicament(String nom, String description, double prix) {
     this.id = compteurId++;
@@ -48,7 +48,6 @@ public class Medicament {
     this.description = description;
   }
 
-
   public double getPrix() {
     return prix;
   }
@@ -58,7 +57,9 @@ public class Medicament {
   }
 
   /**
-   * Deux médicaments sont égaux s'ils ont le même nom et principe actif.
+   * <p>Deux médicaments sont égaux s'ils ont le même nom et principe actif.</p>
+   * @param obj medicament à comparer
+   * @return true si les 2 obj sont égaux, false sinon
    */
   @Override
   public boolean equals(Object obj) {
@@ -80,6 +81,9 @@ public class Medicament {
     return result;
   }
 
+    /**
+     * <p>Réécriture de la fonction toString selon les besoins de la classe médicament</p>
+     */
   @Override
   public String toString() {
     return "Médicament { [ID=" + id + "] " + nom +
