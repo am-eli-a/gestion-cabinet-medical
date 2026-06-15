@@ -55,7 +55,7 @@ public class MedecinController {
     @FXML
     void addMedecin() throws IOException {
         // Il faut d'abord récupérer la description de la nouvelle vue (au format FXML).
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/vue/NewMedecinView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/NewMedecinView.fxml"));
         Parent viewContent = fxmlLoader.load();
 
         // Ensuite, on la place dans une nouvelle Scene...
