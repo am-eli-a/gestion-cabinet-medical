@@ -21,7 +21,7 @@ repositories {
 // Le nom de la classe contenant la méthode "main".
 // Notez que le paquetage complet doit être spécifié.
 application {
-    mainClass = 'fr.univartois.butinfo.sae.cabinet.MedocApplication'
+    mainClass = 'fr.univartois.butinfo.sae.cabinet.PatientApplication'
 }
 
 dependencies {
