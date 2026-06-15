@@ -3,10 +3,14 @@ import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
 import fr.univartois.butinfo.sae.cabinet.service.GestionMedecins;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MedecinController {
 
@@ -49,13 +53,26 @@ public class MedecinController {
     }
 
     @FXML
-    void addMedecin(ActionEvent event) {
+    void addMedecin() throws IOException {
+        // Il faut d'abord récupérer la description de la nouvelle vue (au format FXML).
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/vue/NewMedecinView.fxml"));
+        Parent viewContent = fxmlLoader.load();
 
+        // Ensuite, on la place dans une nouvelle Scene...
+        Scene addPokemonScene = new Scene(viewContent, 800, 600);
+        // que l'on place elle-même dans la fenêtre pour remplacer la scène courante.
+        stage.setScene(addPokemonScene);
+
+        // On lie le modèle au nouveau contrôleur.
+        NewMedecinController controller = fxmlLoader.getController();
+        controller.setStage(stage);
+        controller.setMainScene(scene);
+        controller.bind(medecins);
     }
 
     @FXML
     void removeMedecin(ActionEvent event) {
-
+        medecins.supprimerMedecin(medecinList.getSelectionModel().getSelectedItem().getId());
     }
 
     public void bind(GestionMedecins medecins) {

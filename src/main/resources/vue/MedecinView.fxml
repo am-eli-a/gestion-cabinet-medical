@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -33,18 +32,44 @@
             <top>
                 <VBox spacing="10.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Label fx:id="labelName" maxWidth="1.7976931348623157E308">
+                        <Label fx:id="nom" maxWidth="1.7976931348623157E308" text="Nom : ">
                             <font>
                                 <Font size="20.0" />
                             </font>
                         </Label>
-                        <Label fx:id="descriptionLabel" alignment="TOP_LEFT" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" />
+                  <Label fx:id="prenom" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="Prenom : ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="email" layoutX="10.0" layoutY="49.0" maxWidth="1.7976931348623157E308" text="Email : ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="telephone" layoutX="10.0" layoutY="88.0" maxWidth="1.7976931348623157E308" text="Telephone : ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ordre" layoutX="10.0" layoutY="127.0" maxWidth="1.7976931348623157E308" text="Numero d'ordre : ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="specialite" layoutX="10.0" layoutY="166.0" maxWidth="1.7976931348623157E308" text="Specialite : ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="horaire" layoutX="10.0" layoutY="205.0" maxWidth="1.7976931348623157E308" text="Tarif horaire : ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
                     </children>
                 </VBox>
             </top>
-            <center>
-                <ImageView fx:id="imageView" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-            </center>
             <bottom>
                 <HBox alignment="CENTER" spacing="50.0" BorderPane.alignment="CENTER">
                     <children>
