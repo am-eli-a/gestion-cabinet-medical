@@ -134,19 +134,15 @@ class RendezVousTest {
         LocalDateTime dateRdv = LocalDateTime.of(2025, 6, 10, 14, 0);
         RendezVous rdv1 = new RendezVous(patient, medecin, dateRdv, 30, "RDV 1");
 
-        // Réflexivité
         assertThat(rdv1).isEqualTo(rdv1);
 
-        // Même patient, même médecin et même date/heure => égaux
         RendezVous rdv2 = new RendezVous(patient, medecin, dateRdv, 45, "RDV 2");
         assertThat(rdv1).isEqualTo(rdv2);
 
-        // Date/heure différente => non égaux
         RendezVous rdv3 = new RendezVous(patient, medecin,
                 LocalDateTime.of(2025, 6, 10, 15, 0), 30, "RDV 3");
         assertThat(rdv1).isNotEqualTo(rdv3);
 
-        // Non égalité avec null ou un autre type
         assertThat(rdv1).isNotEqualTo(null);
         assertThat(rdv1).isNotEqualTo("Pas un rendez-vous");
     }
@@ -157,7 +153,6 @@ class RendezVousTest {
         RendezVous rdv1 = new RendezVous(patient, medecin, dateRdv, 30, "RDV 1");
         RendezVous rdv2 = new RendezVous(patient, medecin, dateRdv, 45, "RDV 2");
 
-        // Deux rendez-vous égaux doivent avoir le même hashCode.
         assertThat(rdv1.hashCode()).isEqualTo(rdv2.hashCode());
     }
 
