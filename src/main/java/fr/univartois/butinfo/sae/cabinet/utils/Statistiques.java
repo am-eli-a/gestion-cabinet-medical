@@ -15,14 +15,40 @@ import fr.univartois.butinfo.sae.cabinet.service.GestionRendezVous;
  */
 public class Statistiques {
 
+    /**
+     * Le service de gestion des patients.
+     */
     private final GestionPatients gestionPatients;
+
+    /**
+     * Le service de gestion des médecins.
+     */
     private final GestionMedecins gestionMedecins;
+
+    /**
+     * Le service de gestion des médicaments.
+     */
     private final GestionMedicaments gestionMedicaments;
+
+    /**
+     * Le service de gestion des rendez-vous.
+     */
     private final GestionRendezVous gestionRendezVous;
+
+    /**
+     * Le service de gestion des ordonnances.
+     */
     private final GestionOrdonnances gestionOrdonnances;
 
     /**
-     * Constructeur : injecte tous les services nécessaires.
+     * Constructeur de Statistiques.
+     * Injecte l'ensemble des services nécessaires à l'élaboration des indicateurs.
+     *
+     * @param gestionPatients     Le service de gestion des patients.
+     * @param gestionMedecins     Le service de gestion des médecins.
+     * @param gestionMedicaments  Le service de gestion des médicaments.
+     * @param gestionRendezVous   Le service de gestion des rendez-vous.
+     * @param gestionOrdonnances  Le service de gestion des ordonnances.
      */
     public Statistiques(GestionPatients gestionPatients,
                         GestionMedecins gestionMedecins,
@@ -37,7 +63,8 @@ public class Statistiques {
     }
 
     /**
-     * Affiche un résumé complet des statistiques du cabinet.
+     * Affiche un résumé complet des statistiques du cabinet (chiffres globaux,
+     * répartition des rendez-vous, spécialités médicales, top médecins par activité, etc.).
      */
     public void afficherTableauDeBord() {
         System.out.println("\n╔══════════════════════════════════════════╗");
@@ -89,12 +116,21 @@ public class Statistiques {
     // Méthodes utilitaires
     // -------------------------
 
-    /** Retourne le nombre de rendez-vous pour un statut donné. */
+    /**
+     * Récupère le nombre de rendez-vous enregistrés pour un statut particulier.
+     *
+     * @param statut Le statut du rendez-vous à filtrer.
+     * @return Le nombre de rendez-vous correspondant.
+     */
     public int getNombreRendezVousParStatut(StatutRendezVous statut) {
         return gestionRendezVous.getRendezVousParStatut(statut).size();
     }
 
-    /** Retourne le médecin ayant le plus de rendez-vous (ou null si aucun). */
+    /**
+     * Recherche et retourne le médecin qui possède le plus grand nombre de rendez-vous.
+     *
+     * @return Le médecin le plus actif, ou null s'il n'y a aucun médecin ou aucun rendez-vous.
+     */
     public Medecin getMedecinLePlusActif() {
         Medecin medecinMax = null;
         int max = 0;
@@ -108,6 +144,11 @@ public class Statistiques {
         return medecinMax;
     }
 
+    /**
+     * Retourne une représentation textuelle des statistiques globales (patients, médecins, médicaments, rendez-vous et ordonnances).
+     *
+     * @return Une chaîne de caractères décrivant l'état des statistiques du cabinet.
+     */
     @Override
     public String toString() {
         return "Statistiques { " +
