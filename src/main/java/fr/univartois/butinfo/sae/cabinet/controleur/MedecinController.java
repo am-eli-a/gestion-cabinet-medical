@@ -18,6 +18,8 @@ public class MedecinController {
 
     private Scene scene;
 
+    private Scene mainScene;
+
     @FXML
     private Label email;
 
@@ -104,6 +106,15 @@ public class MedecinController {
             specialite.setText("specialite : "+n.getSpecialite());
             tarif.setText("tarif horaire : "+n.getTarifHoraire());
         });
+    }
+
+    public void setMainScene(Scene mainScene) {
+        this.mainScene = mainScene;
+    }
+
+    @FXML
+    void onMenu(ActionEvent event) {
+        stage.setScene(mainScene);
     }
 
 }

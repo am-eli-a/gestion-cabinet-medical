@@ -116,6 +116,7 @@ public class GlobalController {
         Scene scene = new Scene(viewContent, 800, 600);
 
         MedecinController controller = fxmlLoader.getController();
+        controller.setMainScene(scene);
         controller.setStage(stage);
         controller.setScene(scene);
         controller.bind(gestionMedecins);

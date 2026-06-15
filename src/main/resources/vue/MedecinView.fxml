@@ -24,6 +24,7 @@
                     <children>
                         <Button mnemonicParsing="false" onAction="#addMedecin" text="Ajouter" />
                         <Button mnemonicParsing="false" onAction="#removeMedecin" text="Supprimer" />
+                  <Button mnemonicParsing="false" onAction="#onMenu" text="menu" />
                     </children>
                 </HBox>
             </bottom>
