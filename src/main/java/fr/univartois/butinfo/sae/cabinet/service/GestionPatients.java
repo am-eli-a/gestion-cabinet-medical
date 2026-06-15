@@ -1,6 +1,9 @@
 package fr.univartois.butinfo.sae.cabinet.service;
 
 import fr.univartois.butinfo.sae.cabinet.modele.Patient;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +16,17 @@ public class GestionPatients {
     /**
      * Liste interne des patients enregistrés dans le système.
      */
-    private final List<Patient> patients;
+    private final ObservableList<Patient> patients;
 
     /**
      * Constructeur : initialise une liste de patients vide.
      */
     public GestionPatients() {
-        this.patients = new ArrayList<>();
+        this.patients = FXCollections.observableArrayList();
+    }
+
+    public ObservableList<Patient> getPatients() {
+        return patients;
     }
 
     // -------------------------
