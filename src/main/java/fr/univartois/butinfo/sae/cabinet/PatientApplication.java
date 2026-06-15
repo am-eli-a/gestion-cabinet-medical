@@ -35,6 +35,8 @@ public class PatientApplication extends Application {
 
         PatientController controller = loader.getController();
         controller.setPatients(patients);
+        controller.setStage(stage);
+        controller.setScene(scene);
 
         stage.setTitle("Cabinet médical — Liste des patients");
         stage.setScene(scene);

@@ -1,11 +1,16 @@
 package fr.univartois.butinfo.sae.cabinet.controleur;
 
 import fr.univartois.butinfo.sae.cabinet.modele.Patient;
+import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
 public class PatientController {
 
@@ -39,6 +44,10 @@ public class PatientController {
     @FXML
     private Label tauxLabel;
 
+    private Stage stage;
+
+    private Scene scene;
+
     @FXML
     private void initialize() {
         patientListView.setCellFactory(list -> new ListCell<>() {
@@ -59,6 +68,35 @@ public class PatientController {
 
     public void setPatients(ObservableList<Patient> patients) {
         patientListView.setItems(patients);
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
+    @FXML
+    private void supprimerPatient() {
+        Patient selectionne = patientListView.getSelectionModel().getSelectedItem();
+        if (selectionne != null) {
+            patientListView.getItems().remove(selectionne);
+        }
+    }
+
+    @FXML
+    private void ajouterPatient() throws IOException {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/PatientEditView.fxml"));
+            Parent root = loader.load();
+
+            PatientEditController editController = loader.getController();
+            editController.setPatients(patientListView.getItems());
+            editController.setStage(stage);
+            editController.setSceneRetour(scene);
+
+            stage.setScene(new Scene(root));
     }
 
     private void afficherDetails(Patient patient) {
