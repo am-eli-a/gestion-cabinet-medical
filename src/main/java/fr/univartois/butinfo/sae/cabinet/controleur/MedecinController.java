@@ -59,9 +59,9 @@ public class MedecinController {
         Parent viewContent = fxmlLoader.load();
 
         // Ensuite, on la place dans une nouvelle Scene...
-        Scene addPokemonScene = new Scene(viewContent, 800, 600);
+        Scene addMedecinScene = new Scene(viewContent, 800, 600);
         // que l'on place elle-même dans la fenêtre pour remplacer la scène courante.
-        stage.setScene(addPokemonScene);
+        stage.setScene(addMedecinScene);
 
         // On lie le modèle au nouveau contrôleur.
         NewMedecinController controller = fxmlLoader.getController();
