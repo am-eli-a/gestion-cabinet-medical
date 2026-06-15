@@ -62,7 +62,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="horaire" layoutX="10.0" layoutY="205.0" maxWidth="1.7976931348623157E308" text="Tarif horaire : ">
+                  <Label fx:id="tarif" layoutX="10.0" layoutY="205.0" maxWidth="1.7976931348623157E308" text="Tarif horaire : ">
                      <font>
                         <Font size="20.0" />
                      </font>
