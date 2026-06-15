@@ -25,7 +25,7 @@ public class OrdonnanceApplication extends Application {
         Medicament medicament = new Medicament("Paracétamol", "test description1 et test description2", 2.50);
 
         GestionOrdonnances gestionOrdonnances = new GestionOrdonnances();
-        gestionOrdonnances.ajouterPrescription(new Ordonnance(1, medicament, 4, "par voie orale", 7, "2 fois par jours"));
+        gestionOrdonnances.ajouterPrescription(1, medicament, 4, "par voie orale", 7, "2 fois par jours");
 
 
         ObservableList<Ordonnance> ordonnances = FXCollections.observableArrayList(gestionOrdonnances.listerToutesLesOrdonnances());

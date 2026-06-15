@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="fr.univartois.butinfo.sae.cabinet.controleur.OrdonnanceController"
+            prefWidth="720.0" prefHeight="440.0">
+
+    <left>
+        <ListView fx:id="ordonnanceListView" prefWidth="240.0">
+            <BorderPane.margin>
+                <Insets top="10.0" right="5.0" bottom="10.0" left="10.0"/>
+            </BorderPane.margin>
+        </ListView>
+    </left>
+
+    <center>
+        <GridPane hgap="12.0" vgap="10.0">
+            <padding>
+                <Insets top="15.0" right="15.0" bottom="15.0" left="15.0"/>
+            </padding>
+
+            <Label text="Détails de l'ordonnance"
+                   GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                <font>
+                    <Font name="System Bold" size="16.0"/>
+                </font>
+            </Label>
+
+            <Label text="Id de l'ordonnance :"        GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <Label fx:id="ordonnanceId"    GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Médecin :"        GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <Label fx:id="medecinLabel"    GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="Patient :"      GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <Label fx:id="patientLabel"  GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="Date émission :"      GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <Label fx:id="dateEmission"  GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+            <Label text="Date validité :"      GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <Label fx:id="dateValidite"  GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+            <Label text="Prescriptions :"      GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <Label fx:id="prescriptions"  GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+            <Label text="Remarques :"      GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+            <Label fx:id="remarques"  GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+        </GridPane>
+    </center>
+</BorderPane>
