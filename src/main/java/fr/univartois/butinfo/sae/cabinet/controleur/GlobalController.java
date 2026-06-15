@@ -47,6 +47,14 @@ public class GlobalController {
     @FXML
     private Button listePatient;
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
     // ============================================================
     // INSTANCIATIONS GLOBALES (Services et Objets de Test)
     // ============================================================
@@ -116,6 +124,7 @@ public class GlobalController {
         Scene scene = new Scene(viewContent, 800, 600);
 
         MedecinController controller = fxmlLoader.getController();
+        controller.setMainScene(scene);
         controller.setStage(stage);
         controller.setScene(scene);
         controller.bind(gestionMedecins);
