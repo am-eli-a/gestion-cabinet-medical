@@ -138,7 +138,7 @@ public class RendezVous {
    */
   public double prixConsultation() {
     // TODO : calculer le prix de la consultation
-    return 0.0;
+    return medecin.getTarifHoraire()*(dureeMinutes/60.0) - (medecin.getTarifHoraire()*(dureeMinutes/60.0)*patient.getTauxRemboursement());
   }
 
 
