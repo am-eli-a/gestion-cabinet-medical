@@ -122,13 +122,17 @@ public class Recherche {
      * @param liste La liste des patients à afficher.
      * @param titre Le titre de la section d'affichage.
      */
-    private void afficherResultatsPatients(List<Patient> liste, String titre) {
-        System.out.println("--- " + titre + " (" + liste.size() + " résultat(s)) ---");
+    private String afficherResultatsPatients(List<Patient> liste, String titre) {
+        StringBuilder texte = new StringBuilder();
+
+        texte.append("--- " + titre + " (" + liste.size() + " résultat(s)) ---");
         if (liste.isEmpty()) {
-            System.out.println("  Aucun résultat.");
+            texte.append("  Aucun résultat.");
         } else {
-            for (Patient p : liste) System.out.println("  " + p);
+            for (Patient p : liste) texte.append("  " + p);
         }
+
+        return texte.toString();
     }
 
     /**
@@ -137,13 +141,16 @@ public class Recherche {
      * @param liste La liste des médecins à afficher.
      * @param titre Le titre de la section d'affichage.
      */
-    private void afficherResultatsMedecins(List<Medecin> liste, String titre) {
-        System.out.println("--- " + titre + " (" + liste.size() + " résultat(s)) ---");
+    private String afficherResultatsMedecins(List<Medecin> liste, String titre) {
+        StringBuilder texte = new StringBuilder();
+        texte.append("--- " + titre + " (" + liste.size() + " résultat(s)) ---");
         if (liste.isEmpty()) {
-            System.out.println("  Aucun résultat.");
+            texte.append("  Aucun résultat.");
         } else {
-            for (Medecin m : liste) System.out.println("  " + m);
+            for (Medecin m : liste) texte.append("  " + m);
         }
+
+        return texte.toString();
     }
 
     /**
