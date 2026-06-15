@@ -2,6 +2,9 @@ package fr.univartois.butinfo.sae.cabinet.service;
 
 import fr.univartois.butinfo.sae.cabinet.enumeration.Specialite;
 import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +13,13 @@ import java.util.List;
  */
 public class GestionMedecins {
 
-    private final List<Medecin> medecins;
+    private final ObservableList<Medecin> medecins;
 
     /**
      * Constructeur : initialise la liste vide.
      */
     public GestionMedecins() {
-        this.medecins = new ArrayList<>();
+        this.medecins = FXCollections.observableArrayList();
     }
 
     // -------------------------
@@ -141,6 +144,11 @@ public class GestionMedecins {
      */
     public int getNombreMedecins() {
         return medecins.size();
+    }
+
+
+    public ObservableList<Medecin> getMedecins() {
+        return medecins;
     }
 
 }
