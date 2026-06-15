@@ -80,6 +80,20 @@ public class MedecinController {
 
 
         medecinList.setItems(medecins.getMedecins());
+        medecinList.setCellFactory(list -> {
+            return new javafx.scene.control.ListCell<Medecin>() {
+                @Override
+                protected void updateItem(Medecin medecin, boolean empty) {
+                    super.updateItem(medecin, empty);
+                    if (empty || (medecin == null)) {
+                        setText(null);
+                    } else {
+                        // On affiche uniquement le nom complet du médecin dans la liste
+                        setText("Dr. " + medecin.getNomComplet());
+                    }
+                }
+            };
+        });
 
         medecinList.getSelectionModel().selectedItemProperty().addListener((o, p, n) -> {
             nom.setText("nom : "+n.getNom());
