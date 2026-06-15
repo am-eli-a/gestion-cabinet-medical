@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Appenders>
+        <Console name="CONSOLE_MAIN" target="SYSTEM_OUT">
+            <PatternLayout pattern="%msg%n"/>
+        </Console>
+
+        <Console name="CONSOLE_CABINET" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss] %c{1} %msg%n"/>
+        </Console>
+
+        <File name="FILE_LOG" fileName="logs/application.log">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss] %c{1} %msg%n"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE_MAIN"/>
+        </Root>
+
+        <Logger name="fr.univartois.butinfo.sae.cabinet" level="DEBUG" additivity="false">
+            <AppenderRef ref="CONSOLE_CABINET"/>
+            <AppenderRef ref="FILE_LOG"/>
+        </Logger>
+    </Loggers>
+
+</Configuration>
