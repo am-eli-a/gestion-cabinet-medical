@@ -47,7 +47,7 @@ public class PatientApplication extends Application {
 
         // 3. Chargement de la vue et récupération du contrôleur.
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/ressources/vue/PatientView.fxml"));
+                getClass().getResource("/vue/PatientView.fxml"));
         Scene scene = new Scene(loader.load());
 
         // 4. Association de la liste au contrôleur.
