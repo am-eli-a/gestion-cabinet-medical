@@ -86,7 +86,7 @@ class MedicamentTest {
 
         String result = med.toString();
 
-        assertThat(result).contains("Paracétamol");
+        assertThat(result).contains("Nom médoc");
         assertThat(result).contains("2.5");
         assertThat(result).contains("test description1 et test description2");
         assertThat(result).contains("ID=");
