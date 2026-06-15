@@ -39,50 +39,51 @@ public class Statistiques {
     /**
      * Affiche un résumé complet des statistiques du cabinet.
      */
-    public void afficherTableauDeBord() {
-        System.out.println("\n╔══════════════════════════════════════════╗");
-        System.out.println("║        TABLEAU DE BORD - CABINET MÉDICAL  ║");
-        System.out.println("╚══════════════════════════════════════════╝");
+    public String getStatistiques() {
+        StringBuilder texte = new StringBuilder();
+
+        texte.append("\n╔══════════════════════════════════════════╗");
+        texte.append("║        TABLEAU DE BORD - CABINET MÉDICAL  ║");
+        texte.append("╚══════════════════════════════════════════╝");
 
         // -- Chiffres globaux --
-        System.out.println("\n📋 CHIFFRES GLOBAUX :");
-        System.out.println("  • Patients enregistrés   : " + gestionPatients.getNombrePatients());
-        System.out.println("  • Médecins enregistrés   : " + gestionMedecins.getNombreMedecins());
-        System.out.println("  • Médicaments référencés : " + gestionMedicaments.getNombreMedicaments());
-        System.out.println("  • Rendez-vous total      : " + gestionRendezVous.getNombreRendezVous());
-        System.out.println("  • Ordonnances émises     : " + gestionOrdonnances.getNombreOrdonnances());
+        texte.append("\n📋 CHIFFRES GLOBAUX :");
+        texte.append("  • Patients enregistrés   : ").append(gestionPatients.getNombrePatients());
+        texte.append("  • Médecins enregistrés   : ").append(gestionMedecins.getNombreMedecins());
+        texte.append("  • Médicaments référencés : ").append(gestionMedicaments.getNombreMedicaments());
+        texte.append("  • Rendez-vous total      : ").append(gestionRendezVous.getNombreRendezVous());
+        texte.append("  • Ordonnances émises     : ").append(gestionOrdonnances.getNombreOrdonnances());
 
         // -- Détail des rendez-vous par statut --
-        System.out.println("\n📅 RENDEZ-VOUS PAR STATUT :");
+        texte.append("\n📅 RENDEZ-VOUS PAR STATUT :");
         for (StatutRendezVous statut : StatutRendezVous.values()) {
             int nb = gestionRendezVous.getRendezVousParStatut(statut).size();
-            System.out.println("  • " + statut.getLibelle() + " : " + nb);
+            texte.append("  • ").append(statut.getLibelle()).append(" : ").append(nb);
         }
 
         // -- Médecins par spécialité --
-        System.out.println("\n🩺 MÉDECINS PAR SPÉCIALITÉ :");
+        texte.append("\n🩺 MÉDECINS PAR SPÉCIALITÉ :");
         for (Specialite sp : Specialite.values()) {
             int nb = gestionMedecins.rechercherParSpecialite(sp).size();
             if (nb > 0) {
-                System.out.println("  • " + sp.getLibelle() + " : " + nb);
+                texte.append("  • ").append(sp.getLibelle()).append(" : ").append(nb);
             }
         }
 
         // -- Top médecins (par nombre de RDV) --
-        System.out.println("\n🏆 MÉDECINS PAR NOMBRE DE RENDEZ-VOUS :");
+        texte.append("\n🏆 MÉDECINS PAR NOMBRE DE RENDEZ-VOUS :");
         for (Medecin m : gestionMedecins.listerTousLesMedecins()) {
             int nbRdv = gestionRendezVous.getRendezVousMedecin(m).size();
             int nbOrdo = gestionOrdonnances.getOrdonnancesMedecin(m).size();
-            System.out.println("  • Dr " + m.getNomComplet() +
-                               " (" + m.getSpecialite().getLibelle() + ")" +
-                               " → " + nbRdv + " RDV, " + nbOrdo + " ordonnances");
+            texte.append("  • Dr ").append(m.getNomComplet()).append(" (").append(m.getSpecialite().getLibelle()).append(")").append(" → ").append(nbRdv).append(" RDV, ").append(nbOrdo).append(" ordonnances");
         }
 
         // -- Ordonnances valides --
-        System.out.println("\n💊 ORDONNANCES VALIDES (en cours) : " +
-                           gestionOrdonnances.getOrdonnancesValides().size());
+        texte.append("\n💊 ORDONNANCES VALIDES (en cours) : ").append(gestionOrdonnances.getOrdonnancesValides().size());
 
-        System.out.println("\n══════════════════════════════════════════════\n");
+        texte.append("\n══════════════════════════════════════════════\n");
+
+        return texte.toString();
     }
 
     // -------------------------
