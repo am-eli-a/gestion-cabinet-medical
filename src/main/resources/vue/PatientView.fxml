@@ -7,11 +7,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 
-<!--
-    Vue Master-Detail des patients.
-    À gauche : la liste des patients (Master).
-    À droite : le détail du patient sélectionné (Detail).
--->
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="fr.univartois.butinfo.sae.cabinet.controleur.PatientController"

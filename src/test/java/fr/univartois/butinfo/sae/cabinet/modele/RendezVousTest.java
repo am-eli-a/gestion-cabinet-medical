@@ -49,18 +49,22 @@ class RendezVousTest {
 
         RendezVous rdv = new RendezVous(patient, medecin, dateRdv, "Suivi");
 
+        // Le constructeur simplifié doit fixer une durée par défaut de 30 minutes.
         assertThat(rdv.getDureeMinutes()).isEqualTo(30);
         assertThat(rdv.getStatut()).isEqualTo(StatutRendezVous.PLANIFIE);
     }
 
     @Test
     void testPrixConsultationAvecMocks() {
+        // Tarif horaire de 60 € (soit 1 € par minute).
         when(medecin.getTarifHoraire()).thenReturn(60.0);
+        // Taux de remboursement de 70 % (reste 30 % à charge du patient).
         when(patient.getTauxRemboursement()).thenReturn(0.70);
 
         LocalDateTime dateRdv = LocalDateTime.of(2025, 6, 10, 14, 0);
         RendezVous rdv = new RendezVous(patient, medecin, dateRdv, 30, "Consultation test");
 
+        // Calcul attendu : (60 / 60) * 30 * (1 - 0.70) = 1 * 30 * 0.3 = 9.0
         double prix = rdv.prixConsultation();
 
         assertThat(prix).isCloseTo(9.0, within(0.01));
@@ -78,9 +82,9 @@ class RendezVousTest {
     @Test
     void testConfirmerIgnoreSiNonPlanifie() {
         RendezVous rdv = creerRendezVous();
-        rdv.annuler();
+        rdv.annuler(); // le RDV n'est plus PLANIFIE
 
-        rdv.confirmer();
+        rdv.confirmer(); // doit être ignoré
 
         assertThat(rdv.getStatut()).isEqualTo(StatutRendezVous.ANNULE);
     }
@@ -97,7 +101,7 @@ class RendezVousTest {
     @Test
     void testAnnulerSansEffetSiTermine() {
         RendezVous rdv = creerRendezVous();
-        rdv.terminer();
+        rdv.terminer(); // un RDV terminé ne peut plus être annulé
 
         rdv.annuler();
 
@@ -134,15 +138,19 @@ class RendezVousTest {
         LocalDateTime dateRdv = LocalDateTime.of(2025, 6, 10, 14, 0);
         RendezVous rdv1 = new RendezVous(patient, medecin, dateRdv, 30, "RDV 1");
 
+        // Réflexivité
         assertThat(rdv1).isEqualTo(rdv1);
 
+        // Même patient, même médecin et même date/heure => égaux
         RendezVous rdv2 = new RendezVous(patient, medecin, dateRdv, 45, "RDV 2");
         assertThat(rdv1).isEqualTo(rdv2);
 
+        // Date/heure différente => non égaux
         RendezVous rdv3 = new RendezVous(patient, medecin,
                 LocalDateTime.of(2025, 6, 10, 15, 0), 30, "RDV 3");
         assertThat(rdv1).isNotEqualTo(rdv3);
 
+        // Non égalité avec null ou un autre type
         assertThat(rdv1).isNotEqualTo(null);
         assertThat(rdv1).isNotEqualTo("Pas un rendez-vous");
     }
@@ -153,6 +161,7 @@ class RendezVousTest {
         RendezVous rdv1 = new RendezVous(patient, medecin, dateRdv, 30, "RDV 1");
         RendezVous rdv2 = new RendezVous(patient, medecin, dateRdv, 45, "RDV 2");
 
+        // Deux rendez-vous égaux doivent avoir le même hashCode.
         assertThat(rdv1.hashCode()).isEqualTo(rdv2.hashCode());
     }
 
@@ -174,6 +183,11 @@ class RendezVousTest {
         assertThat(result).contains("Planifié");
     }
 
+    /**
+     * Crée un rendez-vous simple (statut PLANIFIE) réutilisé par plusieurs tests.
+     *
+     * @return un nouveau rendez-vous utilisant les mocks de la classe
+     */
     private RendezVous creerRendezVous() {
         LocalDateTime dateRdv = LocalDateTime.of(2025, 6, 10, 14, 0);
         return new RendezVous(patient, medecin, dateRdv, 30, "Consultation");

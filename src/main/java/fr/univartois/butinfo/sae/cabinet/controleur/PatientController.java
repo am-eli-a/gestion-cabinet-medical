@@ -7,16 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 
-/**
- * Contrôleur de la vue Master-Detail des patients ({@code PatientView.fxml}).
- *
- * <p>Il affiche la liste des patients dans une {@link ListView} et, lorsqu'un
- * patient est sélectionné, présente le détail de ses informations dans la partie
- * droite de la vue.</p>
- */
 public class PatientController {
 
-    /** Liste affichant l'ensemble des patients (partie « Master »). */
     @FXML
     private ListView<Patient> patientListView;
 
@@ -49,7 +41,6 @@ public class PatientController {
 
     @FXML
     private void initialize() {
-        // Par défaut, la ListView utilise toString() : on n'affiche ici que le nom complet.
         patientListView.setCellFactory(list -> new ListCell<>() {
             @Override
             protected void updateItem(Patient patient, boolean empty) {
@@ -62,25 +53,14 @@ public class PatientController {
             }
         });
 
-        // À chaque sélection, on met à jour le panneau de détail.
         patientListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, ancien, nouveau) -> afficherDetails(nouveau));
     }
 
-    /**
-     * Associe à la vue la liste observable des patients à afficher.
-     *
-     * @param patients La liste observable des patients.
-     */
     public void setPatients(ObservableList<Patient> patients) {
         patientListView.setItems(patients);
     }
 
-    /**
-     * Met à jour le panneau de détail avec les informations du patient sélectionné.
-     *
-     * @param patient Le patient sélectionné, ou {@code null} si la sélection est vide.
-     */
     private void afficherDetails(Patient patient) {
         if (patient == null) {
             nomLabel.setText("");
