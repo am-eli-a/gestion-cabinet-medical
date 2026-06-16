@@ -7,6 +7,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="fr.univartois.butinfo.sae.cabinet.controleur.MedocController"
@@ -44,4 +46,14 @@
 
         </GridPane>
     </center>
+
+    <bottom>
+        <HBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
+            <children>
+                <Button mnemonicParsing="false" text="Ajouter" onAction="#ajouter"/>
+                <Button mnemonicParsing="false" text="Supprimer" onAction="#supprimer"/>
+                <Button mnemonicParsing="false" text="Menu" onAction="#onMenu" />
+            </children>
+        </HBox>
+    </bottom>
 </BorderPane>
