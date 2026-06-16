@@ -110,19 +110,24 @@ public class GlobalController {
 
     @FXML
     void onMedecin(ActionEvent event) throws IOException {
+        Scene menuScene = stage.getScene();
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vue/MedecinView.fxml"));
         Parent viewContent = fxmlLoader.load();
 
         Scene scene = new Scene(viewContent, 800, 600);
+        stage.setScene(scene);
+        stage.setTitle("medecin FX");
 
         MedecinController controller = fxmlLoader.getController();
-        controller.setMainScene(scene);
+        GestionMedecins medecins = new GestionMedecins();
+
+        controller.bind(medecins);
         controller.setStage(stage);
         controller.setScene(scene);
-        controller.bind(gestionMedecins);
 
-        stage.setTitle("Cabinet médical — Liste des médecins");
-        stage.setScene(scene);
+        controller.setMainScene(menuScene);
+
         stage.show();
     }
 
