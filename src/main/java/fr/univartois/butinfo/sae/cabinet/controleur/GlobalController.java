@@ -47,13 +47,6 @@ public class GlobalController {
     @FXML
     private Button listePatient;
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void setScene(Scene scene) {
-        this.scene = scene;
-    }
 
     // ============================================================
     // INSTANCIATIONS GLOBALES (Services et Objets de Test)
