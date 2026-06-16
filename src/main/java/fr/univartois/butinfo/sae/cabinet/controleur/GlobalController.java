@@ -128,6 +128,8 @@ public class GlobalController {
 
     @FXML
     void onMedicament(ActionEvent event) throws IOException {
+        Scene menuScene = stage.getScene(); // ← capture la scène menu AVANT de changer
+
         ObservableList<Medicament> medocs = FXCollections.observableArrayList(gestionMedocs.listerTousLesMedicaments());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/MedocView.fxml"));
@@ -135,6 +137,7 @@ public class GlobalController {
 
         MedocController controller = loader.getController();
         controller.setMedocs(medocs);
+        controller.setMainScene(menuScene); // ← passe la scène menu
 
         stage.setTitle("Cabinet médical — Liste des médicaments");
         stage.setScene(scene);
