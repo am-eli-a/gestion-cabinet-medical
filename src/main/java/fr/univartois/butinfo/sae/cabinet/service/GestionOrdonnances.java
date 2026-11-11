@@ -5,6 +5,8 @@ import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
 import fr.univartois.butinfo.sae.cabinet.modele.Medicament;
 import fr.univartois.butinfo.sae.cabinet.modele.Ordonnance;
 import fr.univartois.butinfo.sae.cabinet.modele.Patient;
+import javafx.collections.ObservableList;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +16,13 @@ import java.util.List;
  */
 public class GestionOrdonnances {
 
+    /**
+     * La liste des ordonnances gérées par ce service.
+     */
     private final List<Ordonnance> ordonnances;
 
     /**
-     * Constructeur : initialise la liste vide.
+     * Constructeur : initialise une liste d'ordonnances vide.
      */
     public GestionOrdonnances() {
         this.ordonnances = new ArrayList<>();
@@ -28,8 +33,13 @@ public class GestionOrdonnances {
     // -------------------------
 
     /**
-     * Crée une nouvelle ordonnance vide (sans prescriptions) et l'enregistre.
-     * @return l'ordonnance créée
+     * Crée une nouvelle ordonnance vide (sans prescriptions) et l'enregistre dans le service.
+     *
+     * @param medecin      Le médecin émetteur de l'ordonnance.
+     * @param patient      Le patient destinataire de l'ordonnance.
+     * @param dateValidite La date limite de validité de l'ordonnance.
+     * @param remarques    Les remarques ou consignes globales de l'ordonnance.
+     * @return L'ordonnance créée et enregistrée.
      */
     public Ordonnance creerOrdonnance(Medecin medecin, Patient patient,
                                        LocalDate dateValidite, String remarques) {
@@ -41,7 +51,15 @@ public class GestionOrdonnances {
     }
 
     /**
-     * Ajoute une ligne de prescription à une ordonnance existante.
+     * Ajoute une ligne de prescription à une ordonnance existante à partir de son identifiant.
+     * Si l'ordonnance n'est pas trouvée, un message d'erreur est affiché et aucune prescription n'est ajoutée.
+     *
+     * @param ordonnanceId L'identifiant de l'ordonnance à modifier.
+     * @param medicament   Le médicament à prescrire.
+     * @param quantite     La quantité de médicament prescrite.
+     * @param posologie    La posologie recommandée.
+     * @param dureeJours   La durée du traitement en jours.
+     * @param instructions Les consignes particulières pour la prise du médicament.
      */
     public void ajouterPrescription(int ordonnanceId, Medicament medicament, int quantite,
                                         String posologie, int dureeJours, String instructions) {
@@ -57,7 +75,10 @@ public class GestionOrdonnances {
     }
 
     /**
-     * Recherche une ordonnance par son ID.
+     * Recherche une ordonnance par son identifiant unique.
+     *
+     * @param id L'identifiant unique de l'ordonnance recherchée.
+     * @return L'ordonnance correspondante, ou null si aucune ordonnance ne possède cet ID.
      */
     public Ordonnance rechercherParId(int id) {
         for (Ordonnance o : ordonnances) {
@@ -67,7 +88,10 @@ public class GestionOrdonnances {
     }
 
     /**
-     * Retourne toutes les ordonnances d'un patient.
+     * Récupère toutes les ordonnances associées à un patient donné.
+     *
+     * @param patient Le patient concerné.
+     * @return La liste des ordonnances du patient.
      */
     public List<Ordonnance> getOrdonnancesPatient(Patient patient) {
         List<Ordonnance> resultats = new ArrayList<>();
@@ -78,7 +102,10 @@ public class GestionOrdonnances {
     }
 
     /**
-     * Retourne toutes les ordonnances émises par un médecin.
+     * Récupère toutes les ordonnances rédigées par un médecin donné.
+     *
+     * @param medecin Le médecin concerné.
+     * @return La liste des ordonnances émises par ce médecin.
      */
     public List<Ordonnance> getOrdonnancesMedecin(Medecin medecin) {
         List<Ordonnance> resultats = new ArrayList<>();
@@ -89,7 +116,9 @@ public class GestionOrdonnances {
     }
 
     /**
-     * Retourne uniquement les ordonnances encore valides à ce jour.
+     * Récupère toutes les ordonnances qui sont encore valides à ce jour.
+     *
+     * @return La liste des ordonnances valides.
      */
     public List<Ordonnance> getOrdonnancesValides() {
         List<Ordonnance> resultats = new ArrayList<>();
@@ -100,17 +129,20 @@ public class GestionOrdonnances {
     }
 
     /**
-     * Retourne la liste complète des ordonnances.
+     * Retourne une copie de la liste de toutes les ordonnances enregistrées.
+     *
+     * @return La liste complète des ordonnances.
      */
     public List<Ordonnance> listerToutesLesOrdonnances() {
         return new ArrayList<>(ordonnances);
     }
 
     /**
-     * Retourne le nombre total d'ordonnances.
+     * Récupère le nombre total d'ordonnances enregistrées dans le système.
+     *
+     * @return Le nombre total d'ordonnances.
      */
     public int getNombreOrdonnances() {
         return ordonnances.size();
     }
-
 }

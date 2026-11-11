@@ -12,12 +12,12 @@
 
 **TABLEAU À COMPLÉTER**
 
-| Membre du groupe | Tâches réalisées                             | Ticket associé |
-|------------------|----------------------------------------------|----------------|
-| ...              | ...                                          | ...            |
-| ...              | ...                                          | ...            |
-| ...              | ...                                          | ...            |
-| ...              | ...                                          | ...            |
+| Membre du groupe     | Tâches réalisées                                           | Ticket associé                                     |
+|----------------------|------------------------------------------------------------|----------------------------------------------------|
+| Royon Maxence        | JavaDoc, Test, view Patient, Modification classe Recherche | 28, 3, 2, 14, 26, 22, 16, 5, 11, 21, 25, 29, 28, 9 |
+| Deruelle Leo         | Logger, Test, view Medecin, réalisation des fonctions      | 27, 10, 4, 1, 7, 6                                 |
+| Demey Alice          | JavaDoc, Test, view Ordonnance                             | 8, 15, 19, 17, 27, 29                              |
+| Dufour-Lazrek Amelia | JavaDoc, Test, view Medicament                             | 12, 15, 13, 24, 23, 20, 18, 31, 27                 |
 
 ## Présentation du code de base
 

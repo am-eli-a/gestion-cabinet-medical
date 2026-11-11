@@ -61,7 +61,6 @@ public class Patient extends Personne {
 
     // Pas de setter pour numéroSecu : immuable une fois défini
 
-
     public double getTauxRemboursement() {
         return tauxRemboursement;
     }
@@ -77,6 +76,11 @@ public class Patient extends Personne {
         return Period.between(dateNaissance, LocalDate.now()).getYears();
     }
 
+    /**
+     * <p>Réécriture de la fonction equals</p>
+     * @param obj patient à comparer
+     * @return true si les 2 obj sont égaux, false sinon
+     */
     @Override
     public boolean equals(Object obj) {
         if (!super.equals(obj)) return false;
@@ -84,11 +88,19 @@ public class Patient extends Personne {
         return this.numeroSecu.equals(autre.numeroSecu);
     }
 
+    /**
+     * Génère le code hash code du patient basé sur son numéro de sécu
+     * @return Le code hash code du patient
+     */
     @Override
     public int hashCode() {
         return super.hashCode() * 31 + numeroSecu.hashCode();
     }
 
+    /**
+     * Méthode toString permettant d'avoir les informations concernant le patient
+     * @return nom patient, sa date de naissance, son age, son adresse, son num de sécu et le taux de remboursement
+     */
     @Override
     public String toString() {
         return "Patient  { " + super.toString() +

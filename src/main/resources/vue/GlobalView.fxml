@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univartois.butinfo.sae.cabinet.controleur.GlobalController">
+   <children>
+      <HBox alignment="TOP_CENTER" prefHeight="127.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="listeMedecin" mnemonicParsing="false" onAction="#onMedecin" text="Liste Medecins">
+               <HBox.margin>
+                  <Insets right="15.0" top="100.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="listePatient" mnemonicParsing="false" onAction="#onPatient" text="Liste Patients">
+               <HBox.margin>
+                  <Insets right="15.0" top="100.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="listeOrdonnace" mnemonicParsing="false" onAction="#onOrdonnance" text="Liste Ordonnances">
+               <HBox.margin>
+                  <Insets right="15.0" top="100.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="listeMedicament" mnemonicParsing="false" onAction="#onMedicament" text="Liste Medicaments">
+               <HBox.margin>
+                  <Insets top="100.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -1,8 +1,12 @@
 package fr.univartois.butinfo.sae.cabinet.modele;
 
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
 
 /**
  * Classe représentant une ordonnance médicale. Une ordonnance est émise par un médecin pour un
@@ -16,7 +20,7 @@ public class Ordonnance {
   private final LocalDate dateEmission;
   // Date de validité de l'ordonnance
   private LocalDate dateValidite;
-  private final List<LignePrescription> prescriptions;
+  private final ObservableList<LignePrescription> prescriptions;
   private String remarques;
 
   // Compteur statique pour les IDs
@@ -31,7 +35,7 @@ public class Ordonnance {
     this.patient = patient;
     this.dateEmission = LocalDate.now();
     this.dateValidite = dateValidite;
-    this.prescriptions = new ArrayList<>();
+    this.prescriptions = FXCollections.observableArrayList();
     this.remarques = remarques;
   }
 
@@ -87,11 +91,11 @@ public class Ordonnance {
   public void setDateValidite(LocalDate dateValidite) {
     this.dateValidite = dateValidite;
   }
+  // Retourne une copie défensive pour protéger la liste interne
+  public ObservableList<LignePrescription> getPrescriptions() {
+      return FXCollections.unmodifiableObservableList(prescriptions);
+    }
 
-  public List<LignePrescription> getPrescriptions() {
-    // Retourne une copie défensive pour protéger la liste interne
-    return new ArrayList<>(prescriptions);
-  }
 
   public String getRemarques() {
     return remarques;
@@ -136,9 +140,15 @@ public class Ordonnance {
    *
    * @return le prix total de l'ordonnance
    */
+
   public double getPrixTotal() {
-    // TODO : calculer le prix total de l'ordonnance'
-    return 0.0;
+    double prix = 0;
+    for(LignePrescription e : prescriptions){
+      prix += (e.getMedicament().getPrix())*e.getQuantite();
+    }
+
+    prix -= prix*patient.getTauxRemboursement();
+    return prix;
   }
 
   @Override

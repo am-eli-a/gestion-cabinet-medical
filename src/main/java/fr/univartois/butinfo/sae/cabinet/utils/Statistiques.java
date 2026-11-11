@@ -15,14 +15,40 @@ import fr.univartois.butinfo.sae.cabinet.service.GestionRendezVous;
  */
 public class Statistiques {
 
+    /**
+     * Le service de gestion des patients.
+     */
     private final GestionPatients gestionPatients;
+
+    /**
+     * Le service de gestion des médecins.
+     */
     private final GestionMedecins gestionMedecins;
+
+    /**
+     * Le service de gestion des médicaments.
+     */
     private final GestionMedicaments gestionMedicaments;
+
+    /**
+     * Le service de gestion des rendez-vous.
+     */
     private final GestionRendezVous gestionRendezVous;
+
+    /**
+     * Le service de gestion des ordonnances.
+     */
     private final GestionOrdonnances gestionOrdonnances;
 
     /**
-     * Constructeur : injecte tous les services nécessaires.
+     * Constructeur de Statistiques.
+     * Injecte l'ensemble des services nécessaires à l'élaboration des indicateurs.
+     *
+     * @param gestionPatients     Le service de gestion des patients.
+     * @param gestionMedecins     Le service de gestion des médecins.
+     * @param gestionMedicaments  Le service de gestion des médicaments.
+     * @param gestionRendezVous   Le service de gestion des rendez-vous.
+     * @param gestionOrdonnances  Le service de gestion des ordonnances.
      */
     public Statistiques(GestionPatients gestionPatients,
                         GestionMedecins gestionMedecins,
@@ -37,64 +63,75 @@ public class Statistiques {
     }
 
     /**
-     * Affiche un résumé complet des statistiques du cabinet.
+     * Affiche un résumé complet des statistiques du cabinet (chiffres globaux,
+     * répartition des rendez-vous, spécialités médicales, top médecins par activité, etc.).
      */
-    public void afficherTableauDeBord() {
-        System.out.println("\n╔══════════════════════════════════════════╗");
-        System.out.println("║        TABLEAU DE BORD - CABINET MÉDICAL  ║");
-        System.out.println("╚══════════════════════════════════════════╝");
+    public String getStatistiques() {
+        StringBuilder texte = new StringBuilder();
+
+        texte.append("\n╔══════════════════════════════════════════╗");
+        texte.append("║        TABLEAU DE BORD - CABINET MÉDICAL  ║");
+        texte.append("╚══════════════════════════════════════════╝");
 
         // -- Chiffres globaux --
-        System.out.println("\n📋 CHIFFRES GLOBAUX :");
-        System.out.println("  • Patients enregistrés   : " + gestionPatients.getNombrePatients());
-        System.out.println("  • Médecins enregistrés   : " + gestionMedecins.getNombreMedecins());
-        System.out.println("  • Médicaments référencés : " + gestionMedicaments.getNombreMedicaments());
-        System.out.println("  • Rendez-vous total      : " + gestionRendezVous.getNombreRendezVous());
-        System.out.println("  • Ordonnances émises     : " + gestionOrdonnances.getNombreOrdonnances());
+        texte.append("\n📋 CHIFFRES GLOBAUX :");
+        texte.append("  • Patients enregistrés   : ").append(gestionPatients.getNombrePatients());
+        texte.append("  • Médecins enregistrés   : ").append(gestionMedecins.getNombreMedecins());
+        texte.append("  • Médicaments référencés : ").append(gestionMedicaments.getNombreMedicaments());
+        texte.append("  • Rendez-vous total      : ").append(gestionRendezVous.getNombreRendezVous());
+        texte.append("  • Ordonnances émises     : ").append(gestionOrdonnances.getNombreOrdonnances());
 
         // -- Détail des rendez-vous par statut --
-        System.out.println("\n📅 RENDEZ-VOUS PAR STATUT :");
+        texte.append("\n📅 RENDEZ-VOUS PAR STATUT :");
         for (StatutRendezVous statut : StatutRendezVous.values()) {
             int nb = gestionRendezVous.getRendezVousParStatut(statut).size();
-            System.out.println("  • " + statut.getLibelle() + " : " + nb);
+            texte.append("  • ").append(statut.getLibelle()).append(" : ").append(nb);
         }
 
         // -- Médecins par spécialité --
-        System.out.println("\n🩺 MÉDECINS PAR SPÉCIALITÉ :");
+        texte.append("\n🩺 MÉDECINS PAR SPÉCIALITÉ :");
         for (Specialite sp : Specialite.values()) {
             int nb = gestionMedecins.rechercherParSpecialite(sp).size();
             if (nb > 0) {
-                System.out.println("  • " + sp.getLibelle() + " : " + nb);
+                texte.append("  • ").append(sp.getLibelle()).append(" : ").append(nb);
             }
         }
 
         // -- Top médecins (par nombre de RDV) --
-        System.out.println("\n🏆 MÉDECINS PAR NOMBRE DE RENDEZ-VOUS :");
+        texte.append("\n🏆 MÉDECINS PAR NOMBRE DE RENDEZ-VOUS :");
         for (Medecin m : gestionMedecins.listerTousLesMedecins()) {
             int nbRdv = gestionRendezVous.getRendezVousMedecin(m).size();
             int nbOrdo = gestionOrdonnances.getOrdonnancesMedecin(m).size();
-            System.out.println("  • Dr " + m.getNomComplet() +
-                               " (" + m.getSpecialite().getLibelle() + ")" +
-                               " → " + nbRdv + " RDV, " + nbOrdo + " ordonnances");
+            texte.append("  • Dr ").append(m.getNomComplet()).append(" (").append(m.getSpecialite().getLibelle()).append(")").append(" → ").append(nbRdv).append(" RDV, ").append(nbOrdo).append(" ordonnances");
         }
 
         // -- Ordonnances valides --
-        System.out.println("\n💊 ORDONNANCES VALIDES (en cours) : " +
-                           gestionOrdonnances.getOrdonnancesValides().size());
+        texte.append("\n💊 ORDONNANCES VALIDES (en cours) : ").append(gestionOrdonnances.getOrdonnancesValides().size());
 
-        System.out.println("\n══════════════════════════════════════════════\n");
+        texte.append("\n══════════════════════════════════════════════\n");
+
+        return texte.toString();
     }
 
     // -------------------------
     // Méthodes utilitaires
     // -------------------------
 
-    /** Retourne le nombre de rendez-vous pour un statut donné. */
+    /**
+     * Récupère le nombre de rendez-vous enregistrés pour un statut particulier.
+     *
+     * @param statut Le statut du rendez-vous à filtrer.
+     * @return Le nombre de rendez-vous correspondant.
+     */
     public int getNombreRendezVousParStatut(StatutRendezVous statut) {
         return gestionRendezVous.getRendezVousParStatut(statut).size();
     }
 
-    /** Retourne le médecin ayant le plus de rendez-vous (ou null si aucun). */
+    /**
+     * Recherche et retourne le médecin qui possède le plus grand nombre de rendez-vous.
+     *
+     * @return Le médecin le plus actif, ou null s'il n'y a aucun médecin ou aucun rendez-vous.
+     */
     public Medecin getMedecinLePlusActif() {
         Medecin medecinMax = null;
         int max = 0;
@@ -108,6 +145,11 @@ public class Statistiques {
         return medecinMax;
     }
 
+    /**
+     * Retourne une représentation textuelle des statistiques globales (patients, médecins, médicaments, rendez-vous et ordonnances).
+     *
+     * @return Une chaîne de caractères décrivant l'état des statistiques du cabinet.
+     */
     @Override
     public String toString() {
         return "Statistiques { " +

@@ -2,6 +2,9 @@ package fr.univartois.butinfo.sae.cabinet.service;
 
 import fr.univartois.butinfo.sae.cabinet.enumeration.Specialite;
 import fr.univartois.butinfo.sae.cabinet.modele.Medecin;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +13,13 @@ import java.util.List;
  */
 public class GestionMedecins {
 
-    private final List<Medecin> medecins;
+    private final ObservableList<Medecin> medecins;
 
     /**
      * Constructeur : initialise la liste vide.
      */
     public GestionMedecins() {
-        this.medecins = new ArrayList<>();
+        this.medecins = FXCollections.observableArrayList();
     }
 
     // -------------------------
@@ -25,6 +28,7 @@ public class GestionMedecins {
 
     /**
      * Enregistre un nouveau médecin (vérifie l'unicité du numéro d'ordre).
+     * @param medecin prend un médecin en paramètre et check s'il existe déjà avant de l'ajouter
      */
     public void ajouterMedecin(Medecin medecin) {
         if (rechercherParNumeroOrdre(medecin.getNumeroOrdre()) != null) {
@@ -37,6 +41,8 @@ public class GestionMedecins {
 
     /**
      * Recherche un médecin par son ID.
+     * @param id prend l'id du médecin à rechercher
+     * @return null si pas trouvé, return le médecin sinon
      */
     public Medecin rechercherParId(int id) {
         for (Medecin m : medecins) {
@@ -47,6 +53,8 @@ public class GestionMedecins {
 
     /**
      * Recherche un médecin par son numéro d'ordre.
+     * @param numeroOrdre prend le numéro d'ordre du médecin à rechercher
+     * @return null si pas trouvé, return le médecin sinon
      */
     public Medecin rechercherParNumeroOrdre(String numeroOrdre) {
         for (Medecin m : medecins) {
@@ -57,6 +65,8 @@ public class GestionMedecins {
 
     /**
      * Recherche des médecins par nom ou prénom.
+     * @param terme prend le nom/prénom du médecin à rechercher
+     * @return la liste des résultats, qui est soit vide soit elle contient des médecins dont le nom correspond
      */
     public List<Medecin> rechercherParNom(String terme) {
         List<Medecin> resultats = new ArrayList<>();
@@ -72,6 +82,8 @@ public class GestionMedecins {
 
     /**
      * Retourne tous les médecins d'une spécialité donnée.
+     * @param specialite prend la spécialité du médecin à rechercher
+     * @return la liste des résultats, qui est soit vide soit elle contient des médecins dont la spécialité correspond
      */
     public List<Medecin> rechercherParSpecialite(Specialite specialite) {
         List<Medecin> resultats = new ArrayList<>();
@@ -105,6 +117,8 @@ public class GestionMedecins {
 
     /**
      * Supprime un médecin par son ID.
+     * @param id l'id du médecin à suppr
+     * @return {@code true} si le médecin à été suppr {@code false} si aucun médecin avec cet id n'a été trouvé
      */
     public boolean supprimerMedecin(int id) {
         Medecin m = rechercherParId(id);
@@ -119,6 +133,7 @@ public class GestionMedecins {
 
     /**
      * Retourne la liste complète des médecins.
+     * @return la liste des médecins
      */
     public List<Medecin> listerTousLesMedecins() {
         return new ArrayList<>(medecins);
@@ -129,6 +144,11 @@ public class GestionMedecins {
      */
     public int getNombreMedecins() {
         return medecins.size();
+    }
+
+
+    public ObservableList<Medecin> getMedecins() {
+        return medecins;
     }
 
 }
